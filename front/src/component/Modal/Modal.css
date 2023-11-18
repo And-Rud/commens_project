@@ -1,0 +1,78 @@
+/* Модальне вікно контейнер */
+.modal__container {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Внутрішній контейнер модального вікна */
+.modal__content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.button_container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Заголовок модального вікна */
+.modal__title {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+/* Закриваюча кнопка */
+.modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Анімація входження/виходу модального вікна */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Додайте анімацію до модального вікна */
+.modal__enter {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal__exit {
+  animation: fadeOut 0.3s ease-out;
+}

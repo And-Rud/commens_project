@@ -1,0 +1,26 @@
+.input {
+  padding: 10px 8px;
+  border-radius: 12px;
+  border: 1px solid #e9e8eb;
+  transition: border-color 0.3s ease;
+  position: relative;
+  background-color: #fff;
+}
+.input:focus {
+  border-color: #775ce5;
+  outline: none;
+}
+.myinput {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.myinput label {
+  font-size: 14px;
+}
+.input__img {
+  position: absolute;
+  right: 28px;
+  bottom: 475px;
+  cursor: pointer;
+}

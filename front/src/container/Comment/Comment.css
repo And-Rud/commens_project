@@ -1,0 +1,35 @@
+.comment__container {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  width: 600px;
+  border: 1px solid rgb(125, 121, 121);
+  border-radius: 12px;
+}
+
+.comment__header {
+  display: flex;
+  background-color: rgb(211, 248, 236);
+  height: 40px;
+  align-items: center;
+  gap: 15px;
+  border-radius: 12px;
+  padding: 2px;
+}
+
+.comment__icon {
+  display: flex;
+  gap: 2px;
+  margin-right: auto;
+}
+
+.comment__arrow {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.comment__text {
+  padding: 7px;
+  height: auto;
+}
