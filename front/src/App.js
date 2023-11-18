@@ -4,7 +4,7 @@ import Comment from "./container/Comment/Comment";
 const CommentsSection = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  const [previousText, setPreviousText] = useState(""); // Додана нова стала для збереження попереднього тексту
+  const [previousText, setPreviousText] = useState("");
 
   console.log(comments);
 
