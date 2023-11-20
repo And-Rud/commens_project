@@ -1,0 +1,9 @@
+.alert {
+  border-radius: 10px;
+  background: rgba(242, 136, 61, 0.1);
+  display: flex;
+  padding: 16px 16px;
+  justify-content: center;
+  align-items: center;
+  color: #f2883d;
+}

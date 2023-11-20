@@ -3,3 +3,26 @@
   flex-direction: column;
   gap: 10px;
 }
+
+.comment__form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  gap: 7px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.textarea__input {
+  padding: 10px 8px;
+  border-radius: 12px;
+  border: 1px solid #e9e8eb;
+  transition: border-color 0.3s ease;
+  position: relative;
+  background-color: #fff;
+}
+
+.page__button__block {
+  display: flex;
+  gap: 15px;
+}

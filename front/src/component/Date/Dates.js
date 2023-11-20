@@ -3,6 +3,10 @@ import React from "react";
 const Dates = ({ time }) => {
   let dates = "";
 
+  function formatMinutes(minutes) {
+    return minutes.toString().padStart(2, "0");
+  }
+
   if (time) {
     const date = new Date(time);
     const year = date.getFullYear();
@@ -10,7 +14,8 @@ const Dates = ({ time }) => {
     const day = date.getDate();
     const hours = date.getHours();
     const minutes = date.getMinutes();
-    dates = `${day}.${month}.${year}, ${hours}:${minutes} хв`;
+    const formattedMinutes = formatMinutes(minutes);
+    dates = `${day}.${month}.${year}, ${hours}:${formattedMinutes} хв`;
   } else {
     dates = "00:00";
   }
