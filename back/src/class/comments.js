@@ -31,7 +31,7 @@ class Comments {
     return this.#list.find((item) => item.id === Number(id)) || null;
   }
 
-  static getList = () => this.#list;
+  static getList = () => this.#list.reverse();
 }
 
 module.exports = {
