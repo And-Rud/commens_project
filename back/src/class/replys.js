@@ -26,8 +26,6 @@ class Replys {
     }
     // currentComment.reply[0].previousText = currentComment.text;
 
-    console.log("newReply", newReply);
-
     currentComment.reply.push(newReply);
 
     this.#list.push(newReply);
@@ -37,7 +35,6 @@ class Replys {
     // } else {
     // }
 
-    console.log("list", this.#list);
     return newReply;
   }
 

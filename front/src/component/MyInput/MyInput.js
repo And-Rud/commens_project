@@ -2,6 +2,7 @@ import React from "react";
 import "./MyInput.css";
 
 const MyInput = ({
+  accept,
   name,
   text,
   type,
@@ -14,6 +15,7 @@ const MyInput = ({
     <div className="myinput">
       <label htmlFor={name}>{text}</label>
       <input
+        accept={accept}
         placeholder={placeholder}
         required={isRequired}
         onChange={onChange}

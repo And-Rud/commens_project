@@ -1,0 +1,8 @@
+.download__image__section {
+  display: flex;
+  gap: 10px;
+  height: 40px;
+  margin-bottom: 10px;
+  align-items: center;
+  justify-content: space-between;
+}

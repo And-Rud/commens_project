@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import MyButton from "../MyButton/MyButton";
+import MyInput from "../MyInput/MyInput";
+import "./DownImg.css";
 
 const DownloadImg = ({ onSubmit }) => {
   const [text, setText] = useState("");
   const [image, setImage] = useState(null);
 
-  const handleTextChange = (e) => {
-    setText(e.target.value);
-  };
+  //   const handleTextChange = (e) => {
+  //     setText(e.target.value);
+  //   };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -20,14 +23,9 @@ const DownloadImg = ({ onSubmit }) => {
   };
 
   return (
-    <div>
-      <textarea
-        value={text}
-        onChange={handleTextChange}
-        placeholder="Enter your comment"
-      />
-      <input type="file" accept="image/*" onChange={handleImageChange} />
-      <button onClick={handleSubmit}>Submit Comment</button>
+    <div className="download__image__section">
+      <MyInput type="file" accept="image/*" onChange={handleImageChange} />
+      <MyButton onClick={handleSubmit}>Download image</MyButton>
     </div>
   );
 };

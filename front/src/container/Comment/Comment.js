@@ -82,6 +82,10 @@ const Comment = ({ comment, onReply, level = 1 }) => {
             )}
             {comment.text}
           </section>
+          <img
+            src={`http://localhost:4200/uploads/${comment.image}`}
+            alt="Зображення коментаря"
+          />
         </div>
       </div>
       {isOpenReply ? (

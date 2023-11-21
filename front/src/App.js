@@ -5,7 +5,6 @@ import "./App.css";
 import MyInput from "./component/MyInput/MyInput";
 import MyButton from "./component/MyButton/MyButton";
 import MyAlert from "./component/MyAlert/MyAlert";
-import DownloadImg from "./component/DownloadImg/DownImg";
 
 const CommentsSection = () => {
   const [comments, setComments] = useState([]);
@@ -15,6 +14,7 @@ const CommentsSection = () => {
     homepage: "",
     text: "",
   });
+  const [formData, setFormData] = useState({ image: "" });
   const [isOpen, setIsOpen] = useState(false);
   const [sortDirection, setSortDirection] = useState("asc");
   const [countComments, setCountComments] = useState(0);
@@ -34,7 +34,7 @@ const CommentsSection = () => {
       let res = await axios.get("http://localhost:4200/comments");
       setComments(res.data);
     }, 1000);
-  }, []);
+  }, [countComments]);
 
   const handleReply = (commentIndex, reply) => {
     const newReply = {
@@ -44,8 +44,6 @@ const CommentsSection = () => {
       text: reply.text,
       commentIndex: commentIndex,
     };
-    console.log("newReply", newReply);
-
     const fetch = async () => {
       try {
         const response = await axios.post(
@@ -72,10 +70,18 @@ const CommentsSection = () => {
 
   const handleClick = async (event) => {
     event.preventDefault();
+    console.log("formData.image", formData.image);
+    const formDataToSend = new FormData();
+    formDataToSend.append("image", formData.image);
+    formDataToSend.append("username", newComment.username);
+    formDataToSend.append("email", newComment.email);
+    formDataToSend.append("homepage", newComment.homepage);
+    formDataToSend.append("text", newComment.text);
+    console.log("formDataToSend", formDataToSend);
     try {
       const response = await axios.post(
         "http://localhost:4200/comments",
-        newComment
+        formDataToSend
       );
       const data = response.data;
       console.log("response", response.data);
@@ -91,11 +97,23 @@ const CommentsSection = () => {
       homepage: "",
       text: "",
     });
+    setFormData({
+      image: "",
+    });
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setNewComment({ ...newComment, [name]: value });
+  };
+
+  const handleFileChange = (e) => {
+    setFormData({
+      ...formData,
+      image: e.target.files[0],
+    });
+
+    console.log(e.target.files);
   };
 
   const handleShowInput = () => {
@@ -141,25 +159,6 @@ const CommentsSection = () => {
     setSortDirection(sortDirection === "asc" ? "desc" : "asc");
   };
 
-  const handleCommentSubmit = (newComment) => {
-    // Тут ви можете додати новий коментар до масиву comments або відправити його на сервер
-    // Наприклад:
-    setComments([...comments, newComment]);
-    // Або відправлення на сервер:
-    // fetch('/api/comments', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(newComment),
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //   setComments([...comments, data]);
-    // })
-    // .catch(error => console.error('Error:', error));
-  };
-
   return (
     <div className="comments-section">
       <h2 className="page__title">Comments</h2>
@@ -175,7 +174,11 @@ const CommentsSection = () => {
         <MyButton onClick={() => sortByFieldName("date")}>Sort Date</MyButton>
       </div>
       {isOpen ? (
-        <form onSubmit={handleClick} className="comment__form">
+        <form
+          onSubmit={handleClick}
+          className="comment__form"
+          encType="multipart/form-data"
+        >
           <MyInput
             type="text"
             text="Username"
@@ -211,7 +214,12 @@ const CommentsSection = () => {
             className="textarea__input"
             required
           />
-          <DownloadImg onSubmit={handleCommentSubmit} />
+          <MyInput
+            type="file"
+            name="image"
+            onChange={handleFileChange}
+            accept=".jpg, .jpeg, .png"
+          />
           <MyButton type="submit">Submit</MyButton>
         </form>
       ) : (

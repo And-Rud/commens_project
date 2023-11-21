@@ -1,9 +1,10 @@
 // Підключаємо технологію express для back-end сервера
 const express = require("express");
 const multer = require("multer");
+// const upload = require("../middleware/upload");
+const upload = multer({ dest: "uploads/" });
 const { Comments } = require("../class/comments");
 const { Replys } = require("../class/replys");
-// Cтворюємо роутер - місце, куди ми підключаємо ендпоїнти
 const router = express.Router();
 //======================================================
 router.get("/comments", function (req, res) {
@@ -18,9 +19,12 @@ router.get("/comments", function (req, res) {
   }
 });
 //===============================================
-router.post("/comments", function (req, res) {
+router.post("/comments", upload.single("image"), function (req, res, next) {
   const { username, email, homepage, text } = req.body;
+  console.log("req.f", req.file);
   console.log("req.body", req.body);
+  const image = req.file;
+
   if (!username || !email || !text) {
     return res.status(400).json({
       message: "Помилка. ОБовязкові поля відсутні",
@@ -28,8 +32,14 @@ router.post("/comments", function (req, res) {
   }
 
   try {
-    let comments = Comments.create({ username, email, homepage, text });
-    console.log("comment", comments);
+    let comments = Comments.create({
+      username,
+      email,
+      homepage,
+      text,
+      image: image.filename,
+    });
+    console.log("comments", comments);
     res.status(200).json({
       message: "Коментар створений",
     });
@@ -97,16 +107,7 @@ router.post("/reply", function (req, res) {
   }
 });
 //================================================
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-router.post("/upload", upload.single("image"), function (req, res) {
-  // Тут ви можете обробляти файл image, який буде доступний у req.file
-  const imageBuffer = req.file.buffer;
-  // Логіка обробки файлу
-  return res.status(200).json({
-    message: "Файл завантажений",
-  });
-});
+
 //================================================
 // Підключаємо роутер до бек-енду
 module.exports = router;

@@ -1,8 +1,11 @@
 const express = require("express");
 var cors = require("cors");
+const path = require("path");
 
 const app = express();
 const port = 4200;
+// app.use(express.urlencoded({ extended: true }));
+
 app.use(cors());
 
 // app.get("/comments", (req, res) => {
@@ -16,6 +19,7 @@ app.use(cors());
 // });
 
 app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const router = require("./src/route/index.js");
 

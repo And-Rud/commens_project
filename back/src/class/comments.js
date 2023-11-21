@@ -2,28 +2,21 @@ class Comments {
   static #list = [];
   static count = 1;
 
-  constructor(username, text, email, homepage, reply) {
+  constructor(username, text, email, homepage, image) {
     this.id = Comments.count++;
     this.username = username;
     this.email = email;
     this.homepage = homepage;
+    this.image = image;
     this.text = text;
     this.date = new Date().getTime();
     this.reply = [];
   }
 
-  static create({ username, text, email, homepage, reply }) {
-    const newComments = new Comments(username, text, email, homepage);
-    console.log("newPost", newComments);
+  static create({ username, text, email, homepage, image }) {
+    const newComments = new Comments(username, text, email, homepage, image);
 
-    // if () {
-    //   comment.reply.push(newComments);
-    //   console.log(comment);
-    // } else {
-    //   this.#list.push(newComments);
-    // }
     this.#list.push(newComments);
-    console.log("list", this.#list);
     return newComments;
   }
 
